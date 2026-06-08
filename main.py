@@ -14,7 +14,7 @@ app = FastAPI(title="P2P File Sharing Signaling Server")
 # ===========================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://peer-to-peer-file-sharing-yvei.vercel.app/"],
+    allow_origins=["https://peer-to-peer-file-sharing-yvei.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
