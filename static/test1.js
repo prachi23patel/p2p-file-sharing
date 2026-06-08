@@ -127,7 +127,7 @@ async function startAnswerer() {
 // SIGNALING CONNECTION 
 // ===========================
 function connectToSignaling(role) {
-    const wsUrl = `wss://sliced-bleep-refinery.ngrok-free.dev/ws/${roomId}`;
+    const wsUrl = `wss://peer-to-peer-file-sharing-yvei.vercel.app/ws/${roomId}`;
 
     console.log("Connecting to:", wsUrl);  // Verify URL has actual room ID
     
