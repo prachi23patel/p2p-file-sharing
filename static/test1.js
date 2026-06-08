@@ -127,7 +127,7 @@ async function startAnswerer() {
 // SIGNALING CONNECTION 
 // ===========================
 function connectToSignaling(role) {
-    const wsUrl = `wss://https://peer-to-peer-file-sharing-yvei-jlg7i15g3-prachi-patel-projects1.vercel.app//ws/${roomId}`;
+    const wsUrl = `wss://peer-to-peer-file-sharing-yvei.vercel.app/ws/${roomId}`;
 
     console.log("Connecting to:", wsUrl);  // Verify URL has actual room ID
     
