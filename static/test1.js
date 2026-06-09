@@ -191,8 +191,9 @@ function connectToSignaling(role) {
 // ===========================
 // UI HANDLERS
 // ===========================
-createBtn.onclick = () => {
+createBtn.onclick = (e) => {
     // createBtn.innerText = "Start Room"
+    e.preventDefault();
     roomId = generateRandomString(6);
     roomIdValue.innerText = roomId;
     createRoomId.value = roomId;
@@ -202,7 +203,8 @@ createBtn.onclick = () => {
     updateStatus(`Creating room: ${roomId}...`);
     connectToSignaling("offerer");
 };
-joinBtn.onclick = () => {
+joinBtn.onclick = (e) => {
+    e.preventDefault();
     roomId = roomInput.value.trim();
     if (!roomId) {
         alert("Enter room ID");
