@@ -178,10 +178,13 @@ function connectToSignaling(role) {
     
     ws.onerror = (error) => {
         console.error("WebSocket error:", error);
+        console.log("URL:", wsUrl);
         updateStatus("Connection error");
     };
     
     ws.onclose = () => {
+        console.log("Close code:", event.code);
+    console.log("Close reason:", event.reason);
         updateStatus("Disconnected");
         sendBtn.disabled = true;
     };
