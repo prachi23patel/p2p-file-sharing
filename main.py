@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import string
 import secrets
-import json
+import json , traceback
 from typing import Dict, List, Optional
 from datetime import datetime
 
@@ -404,6 +404,7 @@ async def websocket_handler(websocket: WebSocket, room_id: str):
     
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
+        traceback.print_exc()
         manager.disconnect(websocket)
 
 # ===========================
