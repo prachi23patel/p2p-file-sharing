@@ -138,9 +138,11 @@ function connectToSignaling(role) {
         if (role === "offerer") {
             addmsg("password for creating  " + password);
             ws.send(JSON.stringify({ type: "create", roomId: roomId  , password : password}));
+            startOfferer();
         } else if(role === "answerer") {
             addmsg("password for  joining " + password);
             ws.send(JSON.stringify({ type: "join", roomId: roomId  , password : password}));
+            startAnswerer();
         }
     };
     
@@ -148,10 +150,6 @@ function connectToSignaling(role) {
         const message = JSON.parse(event.data);
         
         switch(message.type) {
-            case "created":
-                startOfferer();
-            case "joined":
-                startAnswerer();
             case "offer":
                 // FIX: Safely ensure peer connection exists before calling methods on it
                 if (!pc) {
@@ -194,7 +192,7 @@ function connectToSignaling(role) {
 // UI HANDLERS
 // ===========================
 createBtn.onclick = () => {
-    createBtn.innerText = "Start Room"
+    // createBtn.innerText = "Start Room"
     roomId = generateRandomString(6);
     roomIdValue.innerText = roomId;
     createRoomId.value = roomId;
