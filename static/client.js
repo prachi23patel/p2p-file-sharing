@@ -129,7 +129,7 @@ async function startAnswerer(peerId) {
 
 // signaling connection
 function connectToSignaling(role) {
-    const wsUrl = `wss://peer-to-peer-file-sharing-yvei.vercel.app/ws/${roomId}`;
+    const wsUrl = `wss://peer-to-peer-file-sharing-production-d1a0.up.railway.app/ws/${roomId}`;
 
     console.log("Connecting to:", wsUrl);  // Verify URL has actual room ID
     ws = new WebSocket(wsUrl);
