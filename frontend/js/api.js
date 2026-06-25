@@ -7,7 +7,7 @@
  */
 
 // ── Config ────────────────────────────────────────────────
-export const BASE_URL = 'https://peer-to-peer-file-sharing-production-d1a0.up.railway.app/';
+export const BASE_URL = 'https://peer-to-peer-file-sharing-production-d1a0.up.railway.app';
 export const TOKEN_KEY = 'peerdrop_access_token';
 
 // ── Error class ───────────────────────────────────────────
