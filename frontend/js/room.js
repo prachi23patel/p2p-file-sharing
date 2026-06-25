@@ -25,7 +25,7 @@ window.onload = function() {
     
     if (roomId &&  myId) {
         // Auto-reconnect
-        const wsUrl = `ws://localhost:8000/ws/${roomId}`;
+        const wsUrl = `ws://https://peer-to-peer-file-sharing-yvei.vercel.app//ws/${roomId}`;
         const ws = new WebSocket(wsUrl);
         
         ws.onopen = () => {
