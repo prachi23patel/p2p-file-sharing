@@ -178,7 +178,7 @@ async function startAnswerer(webso , peerId) {
 // SIGNALING CONNECTION
 // ===========================
 function connectToSignaling(role) {
-    const wsUrl = `ws://127.0.0.1:8000/ws/${roomId}`;
+    const wsUrl = `ws://https://peer-to-peer-file-sharing-yvei.vercel.app//ws/${roomId}`;
     // console.log(`🔌 Connecting to signaling server: ${wsUrl}`);
     myId = sessionStorage.getItem('myId');
     ws = new WebSocket(wsUrl);
