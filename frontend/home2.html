@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PeerDrop — Secure File Sharing</title>
+  <meta name="description" content="Transfer files directly between devices without cloud storage." />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/home2.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════════════════ -->
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-inner">
+
+      <a href="home2.html" class="nav-brand" aria-label="PeerDrop home">
+        <img src="assets/logo.svg" alt="" class="nav-logo" aria-hidden="true" />
+        <span class="nav-brand-name">PeerDrop</span>
+      </a>
+
+      <div class="nav-right">
+        <div class="nav-user">
+          <div class="nav-avatar" id="nav-avatar" aria-hidden="true">?</div>
+          <span class="nav-username" id="nav-username">Loading…</span>
+        </div>
+        <button class="btn-logout" id="logout-btn" aria-label="Log out">
+          <svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 2h3a1 1 0 011 1v10a1 1 0 01-1 1h-3M6.5 10.5L10 8l-3.5-2.5M10 8H2"/>
+          </svg>
+          Logout
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════════════ -->
+  <main class="page-wrap">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-eyebrow" aria-hidden="true">
+        <span class="hero-dot"></span>
+        End-to-End Encrypted
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        Secure <span>Peer-to-Peer</span><br />File Sharing
+      </h1>
+      <p class="hero-sub">
+        Transfer files directly between devices — no cloud, no middlemen.
+        Fast, private, and entirely under your control.
+      </p>
+    </section>
+
+    <!-- ── Two action cards ─────────────────────────────── -->
+    <div class="section-label">Transfer rooms</div>
+    <div class="cards-grid">
+
+      <!-- Card: Create Room -->
+      <div class="card" id="card-create">
+        <div class="card-icon" aria-hidden="true">
+          <svg fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.8">
+            <rect x="2" y="4" width="16" height="12" rx="2"/>
+            <path stroke-linecap="round" d="M10 8v4M8 10h4"/>
+          </svg>
+        </div>
+        <h2 class="card-title">Create Room</h2>
+        <p class="card-desc">
+          Start a new transfer room. Share the generated Room ID with
+          anyone you want to transfer files with.
+        </p>
+        <form class="card-form" id="create-form" novalidate>
+          <input
+            class="card-input"
+            type="text"
+            id="room-name"
+            placeholder="Room name"
+            maxlength="48"
+            autocomplete="off"
+            required
+            aria-label="Room name"
+          />
+          <input
+            class="card-input"
+            type="password"
+            id="room-password"
+            placeholder="Password (optional)"
+            autocomplete="new-password"
+            aria-label="Room password"
+          />
+          <button class="btn-primary" type="submit" id="create-btn">
+            <svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" d="M8 3v10M3 8h10"/>
+            </svg>
+            <div class="spinner" aria-hidden="true"></div>
+            <span class="btn-text">Create Room</span>
+          </button>
+          <div class="card-msg" id="create-msg" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <!-- Card: Join Room -->
+      <div class="card" id="card-join">
+        <div class="card-icon" aria-hidden="true">
+          <svg fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7l5 3-5 3V7z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h2 class="card-title">Join Room</h2>
+        <p class="card-desc">
+          Have a Room ID? Enter it below to connect directly with
+          another device and start transferring files instantly.
+        </p>
+        <form class="card-form" id="join-form" novalidate>
+          <input
+            class="card-input"
+            type="text"
+            id="join-room-id"
+            placeholder="Room ID (e.g. AB1C2D3)"
+            maxlength="16"
+            autocomplete="off"
+            required
+            spellcheck="false"
+            aria-label="Room ID"
+          />
+          <input
+            class="card-input"
+            type="password"
+            id="join-password"
+            placeholder="Password (if required)"
+            autocomplete="current-password"
+            aria-label="Room password"
+          />
+          <button class="btn-primary" type="submit" id="join-btn">
+            <svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 4L14 8l-4 4M14 8H2"/>
+            </svg>
+            <div class="spinner" aria-hidden="true"></div>
+            <span class="btn-text">Join Room</span>
+          </button>
+          <div class="card-msg" id="join-msg" aria-live="polite"></div>
+        </form>
+      </div>
+
+    </div><!-- /.cards-grid -->
+
+    <!-- ── Profile ─────────────────────────────────────── -->
+    <div class="profile-section" aria-labelledby="profile-heading">
+      <div class="section-label" id="profile-heading">Your profile</div>
+      <div class="profile-card" id="profile-card">
+        <div class="profile-avatar" id="profile-avatar" aria-hidden="true">?</div>
+        <div class="profile-info">
+          <div class="skeleton skeleton-text wide" id="skel-name" aria-hidden="true"></div>
+          <div class="profile-name" id="profile-name" style="display:none"></div>
+          <div class="skeleton skeleton-text short" id="skel-email" aria-hidden="true"></div>
+          <div class="profile-email" id="profile-email" style="display:none"></div>
+          <div class="profile-meta">
+            <span class="profile-badge">
+              <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.8">
+                <rect x="1" y="2" width="10" height="9" rx="1.5"/>
+                <path stroke-linecap="round" d="M4 1v2M8 1v2M1 5h10"/>
+              </svg>
+              Member since: <span id="profile-since">—</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script type="module" src="js/home2.js"></script>
+
+  <!-- Skeleton reveal shim -->
+  <script type="module">
+    window.addEventListener('DOMContentLoaded', () => {
+      const observer = new MutationObserver(() => {
+        const name = document.getElementById('profile-name');
+        if (name && name.textContent) {
+          document.getElementById('skel-name').style.display  = 'none';
+          document.getElementById('skel-email').style.display = 'none';
+          name.style.display = '';
+          document.getElementById('profile-email').style.display = '';
+          observer.disconnect();
+        }
+      });
+      const card = document.getElementById('profile-card');
+      if (card) observer.observe(card, { childList: true, subtree: true, characterData: true });
+    });
+  </script>
+
+</body>
+</html>

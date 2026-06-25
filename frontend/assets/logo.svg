@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Node circles -->
+  <circle cx="24" cy="10" r="5" fill="#4F8EF7"/>
+  <circle cx="10" cy="36" r="5" fill="#4F8EF7"/>
+  <circle cx="38" cy="36" r="5" fill="#4F8EF7"/>
+
+  <!-- Connection lines -->
+  <line x1="24" y1="14" x2="10" y2="32" stroke="#4F8EF7" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="24" y1="14" x2="38" y2="32" stroke="#4F8EF7" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="13" y1="36" x2="35" y2="36" stroke="#4F8EF7" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- Center downward arrow (file transfer) -->
+  <path d="M24 18 L24 30 M19 25 L24 30 L29 25" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room — PeerDrop</title>
+  <meta name="description" content="PeerDrop transfer room — chat and send files peer-to-peer." />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/room.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════════════════ -->
+  <nav class="navbar" aria-label="Room navigation">
+    <div class="nav-inner">
+
+      <!-- Brand -->
+      <a href="home2.html" class="nav-brand" aria-label="Back to PeerDrop home">
+        <img src="assets/logo.svg" alt="" class="nav-logo" aria-hidden="true" />
+        <span class="nav-brand-name">PeerDrop</span>
+      </a>
+
+      <!-- Room info (centre) -->
+      <div class="nav-room-info">
+        <span class="nav-room-name" id="nav-room-name">Loading…</span>
+        <span
+          class="nav-room-id"
+          id="nav-room-id"
+          title="Click to copy Room ID"
+          role="button"
+          tabindex="0"
+          aria-label="Copy Room ID"
+        ></span>
+        <span class="nav-peers" id="nav-peers" aria-live="polite">
+          <span class="peers-dot" aria-hidden="true"></span>
+          <span id="peers-count">1</span> peer(s)
+        </span>
+      </div>
+
+      <!-- User + leave -->
+      <div class="nav-right">
+        <div class="nav-user">
+          <div class="nav-avatar" id="nav-avatar" aria-hidden="true">?</div>
+          <span class="nav-username" id="nav-username">…</span>
+        </div>
+        <button class="btn-leave" id="leave-btn" aria-label="Leave room">
+          <svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 2H3a1 1 0 00-1 1v10a1 1 0 001 1h3M10 11l4-3-4-3M14 8H6"/>
+          </svg>
+          Leave
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROOM LAYOUT  (sidebar + main panel)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="room-layout">
+
+    <!-- ── Sidebar ──────────────────────────────────────── -->
+    <aside class="sidebar" aria-label="Room sidebar">
+
+      <!-- User profile block -->
+      <div class="sidebar-header">
+        <div class="sidebar-title">You</div>
+        <div class="profile-block" id="profile-block">
+          <div class="profile-block-avatar" id="sb-avatar">?</div>
+          <div class="profile-block-info">
+            <div class="profile-block-name"  id="sb-name">Loading…</div>
+            <div class="profile-block-email" id="sb-email">…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Peers in room -->
+      <div class="peers-section">
+        <div class="sidebar-title">Peers in room</div>
+        <ul class="peers-list" id="peers-list" aria-label="Connected peers">
+          <!-- Populated by room.js -->
+        </ul>
+      </div>
+
+      <!-- Shared files -->
+      <div class="files-section">
+        <div class="sidebar-title">Shared files</div>
+        <div class="files-scroll">
+          <ul class="file-list" id="file-list" aria-label="Shared files">
+            <!-- Populated by room.js -->
+          </ul>
+          <div class="files-empty" id="files-empty">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>No files shared yet</span>
+          </div>
+        </div>
+      </div>
+
+    </aside><!-- /.sidebar -->
+
+    <!-- ── Main panel ────────────────────────────────────── -->
+    <div class="main-panel">
+
+      <!-- Chat messages -->
+      <div class="chat-area" id="chat-area" role="log" aria-live="polite" aria-label="Chat messages">
+
+        <!-- Date divider (static example) -->
+        <div class="chat-date-divider">
+          <span id="chat-date-label">Today</span>
+        </div>
+
+        <!-- System message: room joined -->
+        <div class="msg-system" id="msg-joined">
+          You joined the room
+        </div>
+
+        <!-- Messages appended here by room.js -->
+      </div>
+
+      <!-- Typing indicator -->
+      <div class="typing-indicator" id="typing-indicator" aria-live="polite">
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span id="typing-text">Someone is typing…</span>
+      </div>
+
+      <!-- Compose panel -->
+      <div class="compose-panel">
+
+        <!-- File preview bar (shown when file selected) -->
+        <div class="file-preview-bar" id="file-preview-bar" aria-live="polite">
+          <svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.6" aria-hidden="true"
+               style="width:15px;height:15px;color:var(--accent);flex-shrink:0">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6L9 2z"/>
+            <path stroke-linecap="round" d="M9 2v4h4"/>
+          </svg>
+          <span class="file-preview-name" id="file-preview-name">filename.pdf</span>
+          <span class="file-preview-size" id="file-preview-size">0 KB</span>
+          <button class="file-preview-remove" id="file-preview-remove" aria-label="Remove selected file">
+            <svg fill="none" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" d="M2 2l10 10M12 2L2 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Compose row -->
+        <div class="compose-row">
+
+          <!-- Attach file button -->
+          <button class="btn-attach" id="attach-btn" aria-label="Attach file">
+            <svg fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 01-2.828-2.828l6.414-6.414a4 4 0 015.656 5.656l-6.415 6.414a6 6 0 01-8.485-8.485l6.172-6.172"/>
+            </svg>
+          </button>
+
+          <!-- Hidden file input -->
+          <input type="file" id="file-input" aria-hidden="true" />
+
+          <!-- Message textarea -->
+          <div class="msg-input-wrap">
+            <textarea
+              class="msg-input"
+              id="msg-input"
+              placeholder="Type a message… (Enter to send, Shift+Enter for newline)"
+              rows="1"
+              aria-label="Message input"
+              maxlength="4000"
+            ></textarea>
+          </div>
+
+          <!-- Send button -->
+          <button class="btn-send" id="send-btn" aria-label="Send message" disabled>
+            <svg fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 10l14-7-7 14V11L3 10z"/>
+            </svg>
+          </button>
+
+        </div><!-- /.compose-row -->
+
+        <p class="compose-hint">
+          Press <kbd>Enter</kbd> to send &nbsp;·&nbsp; <kbd>Shift+Enter</kbd> for a new line
+        </p>
+
+      </div><!-- /.compose-panel -->
+
+    </div><!-- /.main-panel -->
+
+  </div><!-- /.room-layout -->
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script type="module" src="js/room.js"></script>
+
+</body>
+</html>
