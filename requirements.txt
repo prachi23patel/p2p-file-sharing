@@ -13,6 +13,6 @@ pyJWT # focused JWT only
 pwdlib[argon2] # Newer, modern approach
 
 python-multipart # This library is used to handle form data, especially when a request includes files.
-# pydantic[email]# Pydantic is used for data validation and parsing in FastAPI.
+pydantic[email]# Pydantic is used for data validation and parsing in FastAPI.
 python-dotenv # load environment variables from a .env file into your app.
 alembic # used for database migrations (changing your DB schema safely over time).
