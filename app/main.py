@@ -10,7 +10,7 @@ app = FastAPI(title="P2P File Sharing Signaling Server")
 # CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://peer-to-peer-file-sharing-yvei.vercel.app",
+    allow_origins=["https://peer-to-peer-file-sharing-yvei-j189g1e0j-prachi-patel-projects1.vercel.app",
                      "http://127.0.0.1:5500",         # Local development
                      "http://localhost:8000"],          # Local backend]
     allow_credentials=True,
