@@ -170,6 +170,7 @@ joinForm.addEventListener('submit', async (e) => {
     sessionStorage.setItem('pd_room_role',    'guest');
 
     setCardMsg(joinMsg, `Joining room ${roomId}…`, 'success');
+    
     showToast(`Joining ${roomId}`, 'info', 1800);
     try {
         // for routers/rooms/join
