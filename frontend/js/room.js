@@ -438,7 +438,7 @@ document.getElementById('leave-btn').addEventListener('click', () => {
   sessionStorage.removeItem('pd_room_name');
   sessionStorage.removeItem('pd_room_password');
   sessionStorage.removeItem('pd_room_role');
-  window.location.href = 'home2.html';
+  window.location.href = 'index.html';
 });
 
 // ── Init ──────────────────────────────────────────────────
