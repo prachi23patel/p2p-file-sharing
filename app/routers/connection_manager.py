@@ -239,8 +239,8 @@ class ConnectionManager():
                 self.rooms[room_id]["peers"].remove(peerId)
 
         # Remove from all mappings
-        peer_name = self.peer_names[peerId]
-        self.peer_names.pop(peer_name,None)
+        # peer_name = self.peer_names[peerId]
+        # self.peer_names.pop(peer_name,None)
         self.peer_room.pop(peerId, None)
         self.peer_connection.pop(peerId, None)
         
