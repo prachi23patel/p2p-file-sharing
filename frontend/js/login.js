@@ -94,7 +94,7 @@ form.addEventListener('submit', async (e) => {
     });
 
     // Success: token stored by api.js — navigate home
-    window.location.href = 'home2.html';
+    window.location.href = 'index.html';
   } catch (err) {
     showError(err.message || 'Login failed. Please try again.');
   } finally {
