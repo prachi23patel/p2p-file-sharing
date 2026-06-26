@@ -17,7 +17,7 @@ class ConnectionManager():
         #peerId -> bool
         self.peer_names : Dict[str , str] = {}
         self.reconnecting_peers: Dict[str, asyncio.Task] = {}  # peerId -> cleanup_task
-        self.reconnect_timeout = 10  # seconds
+        self.reconnect_timeout = 30  # seconds
 
     async def create_room(self, websocket: WebSocket, room_id: str,peer_name : str, peerId: str) -> bool:
         if room_id in self.rooms:
