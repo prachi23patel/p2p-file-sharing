@@ -186,11 +186,11 @@ export function requireAuth() {
 
 /**
  * Guard for auth pages (login / register).
- * Redirects to home2.html if the user is already logged in.
+ * Redirects to index.html if the user is already logged in.
  */
 export function redirectIfAuthenticated() {
   if (isAuthenticated()) {
-    window.location.href = 'home2.html';
+    window.location.href = 'index.html';
   }
 }
 
