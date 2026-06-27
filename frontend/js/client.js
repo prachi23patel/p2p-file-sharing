@@ -179,7 +179,7 @@ async function startAnswerer(webso , peerId) {
 // ===========================
 // SIGNALING CONNECTION
 // ===========================
-function connectToSignaling(role) {
+async function connectToSignaling(role) {
     const wsUrl = `wss://peer-to-peer-file-sharing-production-d1a0.up.railway.app/ws/${roomId}`;
     // console.log(`🔌 Connecting to signaling server: ${wsUrl}`);
     myId = sessionStorage.getItem('myId');
@@ -372,10 +372,10 @@ export async function create(name, roomId1, peerId , my_name , isCreate) {
     dataChannel = {};
     if(isCreate){
         // console.log(`📡 Connecting to signaling as offerer...`);
-        connectToSignaling("offerer");
+        await connectToSignaling("offerer");
     }else{
         // console.log(`📡 Connecting to signaling as answerer...`);
-        connectToSignaling("answerer");
+        await connectToSignaling("answerer");
     }
     if (isInRoom){return true;}
     return false;
