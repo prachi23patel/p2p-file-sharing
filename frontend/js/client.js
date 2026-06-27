@@ -225,7 +225,7 @@ function connectToSignaling(role) {
 }
 
 export async function websocket_messages(wes , message){
-    import { showToast } from './home2.js';
+    home = await import('./home2.js');
         try {
             // console.log(`📨 Received message:`, message.type);
             myId = sessionStorage.getItem('myId');
@@ -342,7 +342,7 @@ export async function websocket_messages(wes , message){
                     break;
                     
                 default:
-                    toastContainer(message , 'error')
+                    home.showToast(message , 'error')
                     console.log(`❓ Unknown message type: ${message.type}`);
                     console.log(message);
             }
