@@ -17,6 +17,7 @@ let incomingFileSender = "";
 let incomingFileSize = 0;  // For file transfer
 let all_peers_id = [];
 let all_peers_name = [];
+let isInRoom = false;
 
 let roomModule = null;
 
@@ -334,10 +335,12 @@ export async function websocket_messages(wes , message){
                     break;
                 }
                 case "created":
+                    isInRoom = true;
                     // console.log(`✅ Room created: ${message.roomId}`);
                     break;
                     
                 case "joined":
+                    isInRoom = true;
                     // console.log(`✅ Joined room: ${message.roomId}`);
                     break;
                     
@@ -374,6 +377,8 @@ export async function create(name, roomId1, peerId , my_name , isCreate) {
         // console.log(`📡 Connecting to signaling as answerer...`);
         connectToSignaling("answerer");
     }
+    if (isInRoom){return true;}
+    return false;
 }
 
 export async function sendMsg(message , isFile , selectedFile) {
