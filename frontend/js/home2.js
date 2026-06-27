@@ -123,16 +123,18 @@ createForm.addEventListener('submit', async (e) => {
     sessionStorage.setItem('pd_room_role',      'host');
     setCardMsg(createMsg, `Room created! ID: ${roomId} — entering…`, 'success');
     showToast(`Room "${room_name}" created.`, 'success', 1800);
+
+    let created = false;
     try {
         // goes to routers/rooms/create
         let res = await createRoom({room_name : room_name , room_id : roomId , password : password});
         myId = res.user_id;
         // goes to client.js -> websockets.py
-        await create( room_name ,roomId , myId ,user.username , true);
+        if(await create( room_name ,roomId , myId ,user.username , true))created = true;
     } catch (err) {
         console.error("create error:", err);
     }
-    setTimeout(() => { window.location.href = 'room.html'; }, 700);
+    if(created)setTimeout(() => { window.location.href = 'room.html'; }, 700);
   } catch (_) {
     setCardMsg(createMsg, 'Failed to create room. Try again.', 'error');
     createBtn.disabled = false;
@@ -170,19 +172,20 @@ joinForm.addEventListener('submit', async (e) => {
     sessionStorage.setItem('pd_room_role',    'guest');
 
     setCardMsg(joinMsg, `Joining room ${roomId}…`, 'success');
-    
+    let created = false;
     showToast(`Joining ${roomId}`, 'info', 1800);
     try {
         // for routers/rooms/join
         let res = await joinRoom({room_id : roomId , password : password});
         myId = res.user_id;
         // for websocket connections -> client.js -> websockets.py
-        await create(name ,roomId, myId , user.username , false);
+        if (await create(name ,roomId, myId , user.username , false)){
+          created = true;
+        }
     } catch (err) {
         console.error("create error:", err);
     }
-    
-    setTimeout(() => { window.location.href = 'room.html'; }, 700);
+    if(created)setTimeout(() => { window.location.href = 'room.html'; }, 700);
   } catch (_) {
     setCardMsg(joinMsg, 'Could not join room. Check the ID and password.', 'error');
     joinBtn.disabled = false;
