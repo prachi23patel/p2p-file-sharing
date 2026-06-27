@@ -18,7 +18,7 @@ requireAuth();
 let myId = null;
 
 // ── Toast ─────────────────────────────────────────────────
-export const toastContainer = document.getElementById('toast-container');
+const toastContainer = document.getElementById('toast-container');
 
 /**
  * Show a temporary toast notification.
@@ -26,7 +26,7 @@ export const toastContainer = document.getElementById('toast-container');
  * @param {'success'|'error'|'info'} [type='info']
  * @param {number} [duration=3500]
  */
-function showToast(message, type = 'info', duration = 3500) {
+export function showToast(message, type = 'info', duration = 3500) {
   const icons = {
     success: `<svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 4L6 11l-3-3"/></svg>`,
     error:   `<svg fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path stroke-linecap="round" d="M8 5v3.5M8 11v.5"/></svg>`,
