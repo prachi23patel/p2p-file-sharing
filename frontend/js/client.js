@@ -342,7 +342,7 @@ export async function websocket_messages(wes , message){
                     break;
                     
                 default:
-                    home.showToast(message , 'error')
+                    home.showToast(message , 'error');
                     console.log(`❓ Unknown message type: ${message.type}`);
                     console.log(message);
             }
