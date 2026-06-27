@@ -19,6 +19,8 @@ let all_peers_id = [];
 let all_peers_name = [];
 
 let roomModule = null;
+
+import { toastContainer } from './home2.js';
 // ===========================
 // DATA CHANNEL HANDLERS
 // ===========================
@@ -340,6 +342,7 @@ export async function websocket_messages(wes , message){
                     break;
                     
                 default:
+                    toastContainer(message , 'error')
                     console.log(`❓ Unknown message type: ${message.type}`);
                     console.log(message);
             }
