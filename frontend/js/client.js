@@ -20,7 +20,7 @@ let all_peers_name = [];
 
 let roomModule = null;
 
-import { toastContainer } from './home2.js';
+import { showToast } from './home2.js';
 // ===========================
 // DATA CHANNEL HANDLERS
 // ===========================
