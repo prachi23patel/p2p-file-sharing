@@ -226,7 +226,7 @@ function connectToSignaling(role) {
 }
 
 export async function websocket_messages(wes , message){
-    home = await import('./home2.js');
+    const home = await import('./home2.js');
         try {
             // console.log(`📨 Received message:`, message.type);
             myId = sessionStorage.getItem('myId');
