@@ -18,7 +18,7 @@ requireAuth();
 let myId = null;
 
 // ── Toast ─────────────────────────────────────────────────
-const toastContainer = document.getElementById('toast-container');
+export const toastContainer = document.getElementById('toast-container');
 
 /**
  * Show a temporary toast notification.
