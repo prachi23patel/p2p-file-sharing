@@ -20,7 +20,6 @@ let all_peers_name = [];
 
 let roomModule = null;
 
-import { showToast } from './home2.js';
 // ===========================
 // DATA CHANNEL HANDLERS
 // ===========================
@@ -226,6 +225,7 @@ function connectToSignaling(role) {
 }
 
 export async function websocket_messages(wes , message){
+    import { showToast } from './home2.js';
         try {
             // console.log(`📨 Received message:`, message.type);
             myId = sessionStorage.getItem('myId');
