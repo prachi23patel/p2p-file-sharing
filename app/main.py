@@ -10,9 +10,9 @@ app = FastAPI(title="P2P File Sharing Signaling Server")
 # CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://peer-to-peer-file-sharing.vercel.app",
+    allow_origins=["https://p2p-file-sharing-eight.vercel.app",
                      "http://127.0.0.1:5500",         # Local development
-                     "http://localhost:8000"],          # Local backend]
+                     "http://localhost:8080"],          # Local backend]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,7 +31,7 @@ app.include_router(rooms.router)
 
 if __name__ == "__main__":
     print("Starting P2P File Sharing Signaling Server...")
-    print("WebSocket endpoint: ws://localhost:8000/ws/{room_id}")
+    print("WebSocket endpoint: ws://localhost:8080/ws/{room_id}")
     print("HTTP endpoints: /, /health, /stats, /room/{room_id}")
     
     uvicorn.run(
