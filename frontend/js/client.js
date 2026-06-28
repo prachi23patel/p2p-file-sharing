@@ -180,53 +180,57 @@ async function startAnswerer(webso , peerId) {
 // SIGNALING CONNECTION
 // ===========================
 async function connectToSignaling(role) {
-    const wsUrl = `wss://127.0.0.1:8000/ws/${roomId}`;
-    // console.log(`🔌 Connecting to signaling server: ${wsUrl}`);
-    myId = sessionStorage.getItem('myId');
-    ws = new WebSocket(wsUrl);
-    
-    ws.onopen = () => {
-        // console.log(`✅ Connected to signaling server as ${role}`);
-        
-        if (role === "offerer") {
-            ws.send(JSON.stringify({
-                type: "create",
-                roomId: roomId,
-                my_name : myName,
-                myId: myId
-            }));
-            // console.log(`📤 Sent create room request for ${roomId}`);
-        } else if (role === "answerer") {
-            ws.send(JSON.stringify({
-                type: "join",
-                roomId: roomId,
-                my_name : myName,
-                myId: myId
-            }));
-            // console.log(`📤 Sent join room request for ${roomId}`);
-        }
-    };
-    
-    ws.onmessage = async (event) => await websocket_messages(ws , JSON.parse(event.data));
-    
-    ws.onerror = (error) => {
-        console.error('❌ WebSocket error:', error);
-        // console.log(`URL: ${wsUrl}`);
-    };
-    
-    ws.onclose = (event) => {
-        // console.log(`🔌 WebSocket closed. Code: ${event.code}, Reason: ${event.reason}`);
-        
-        // Handle reconnection
-        if (event.code === 1001 || event.code === 1006) {
-            console.log('🔄 Attempting to reconnect...');
-            setTimeout(() => {connectToSignaling(role);}, 2000);
-        }
-    };
+    const wsUrl = `wss://p2p-file-sharing-production-770f.up.railway.app/ws/${roomId}`;
+    return new Promise((resolve, reject) => {
+        let joinResolve = resolve;
+        // console.log(`🔌 Connecting to signaling server: ${wsUrl}`);
+        myId = sessionStorage.getItem('myId');
+        ws = new WebSocket(wsUrl);
+
+        ws.onopen = () => {
+            // console.log(`✅ Connected to signaling server as ${role}`);
+            
+            if (role === "offerer") {
+                ws.send(JSON.stringify({
+                    type: "create",
+                    roomId: roomId,
+                    my_name : myName,
+                    myId: myId
+                }));
+                // console.log(`📤 Sent create room request for ${roomId}`);
+            } else if (role === "answerer") {
+                ws.send(JSON.stringify({
+                    type: "join",
+                    roomId: roomId,
+                    my_name : myName,
+                    myId: myId
+                }));
+                // console.log(`📤 Sent join room request for ${roomId}`);
+            }
+        };
+
+        ws.onmessage = async (event) => await websocket_messages(ws , JSON.parse(event.data) , joinResolve);
+
+        ws.onerror = (error) => {
+            console.error('❌ WebSocket error:', error);
+            // console.log(`URL: ${wsUrl}`);
+        };
+
+        ws.onclose = (event) => {
+            // console.log(`🔌 WebSocket closed. Code: ${event.code}, Reason: ${event.reason}`);
+            
+            // Handle reconnection
+            if (event.code === 1001 || event.code === 1006) {
+                console.log('🔄 Attempting to reconnect...');
+                setTimeout(() => {connectToSignaling(role);}, 2000);
+            }
+        };
+    });
+    console.log("connect to signaling ended");
 }
 
-export async function websocket_messages(wes , message){
-    const home = await import('./home2.js');
+export async function websocket_messages(wes , message , joinResolve){
+    // const home = await import('./home2.js');
         try {
             // console.log(`📨 Received message:`, message.type);
             myId = sessionStorage.getItem('myId');
@@ -336,16 +340,26 @@ export async function websocket_messages(wes , message){
                 }
                 case "created":
                     isInRoom = true;
+                    if (joinResolve) {
+                        joinResolve();      // This finishes await connectToSignaling()
+                        joinResolve = null;
+                    }
+                    console.log(isInRoom , "in created");
                     // console.log(`✅ Room created: ${message.roomId}`);
                     break;
                     
                 case "joined":
                     isInRoom = true;
+                    if (joinResolve) {
+                        joinResolve();      // This finishes await connectToSignaling()
+                        joinResolve = null;
+                    }
+                    console.log(isInRoom , "in joined");
                     // console.log(`✅ Joined room: ${message.roomId}`);
                     break;
                     
                 default:
-                    home.showToast(message , 'error');
+                    // home.showToast(message , 'error');
                     console.log(`❓ Unknown message type: ${message.type}`);
                     console.log(message);
             }
@@ -378,6 +392,7 @@ export async function create(name, roomId1, peerId , my_name , isCreate) {
         await connectToSignaling("answerer");
     }
     if (isInRoom){return true;}
+    console.log(isInRoom , "returned");
     return false;
 }
 
