@@ -25,7 +25,7 @@ window.onload = function() {
     
     if (roomId &&  myId) {
         // Auto-reconnect
-        const wsUrl = `wss://peer-to-peer-file-sharing-production-d1a0.up.railway.app/ws/${roomId}`;
+        const wsUrl = `wss://p2p-file-sharing-production-770f.up.railway.app/ws/${roomId}`;
         const ws = new WebSocket(wsUrl);
         
         ws.onopen = () => {
