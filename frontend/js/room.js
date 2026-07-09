@@ -402,11 +402,11 @@ fileInput.addEventListener('change', () => {
   if (!file) return;
 
   // 100 MB guard
-  if (file.size > 100 * 1024 * 1024) {
-    showToast('File too large. Max size is 100 MB.', 'error');
-    fileInput.value = '';
-    return;
-  }
+  // if (file.size > 100 * 1024 * 1024) {
+  //   showToast('File too large. Max size is 100 MB.', 'error');
+  //   fileInput.value = '';
+  //   return;
+  // }
 
   selectedFile = file;
   filePreviewName.textContent = file.name;
