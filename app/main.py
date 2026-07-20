@@ -31,7 +31,7 @@ app.include_router(rooms.router)
 
 if __name__ == "__main__":
     print("Starting P2P File Sharing Signaling Server...")
-    print("WebSocket endpoint: ws://localhost:8080/ws/{room_id}")
+    print("WebSocket endpoint: wss://p2p-file-sharing-zcfy.onrender.com//ws/{room_id}")
     print("HTTP endpoints: /, /health, /stats, /room/{room_id}")
     
     uvicorn.run(
