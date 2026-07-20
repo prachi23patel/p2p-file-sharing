@@ -25,7 +25,7 @@ window.onload = function() {
     
     if (roomId &&  myId) {
         // Auto-reconnect
-        const wsUrl = `wss://p2p-file-sharing-zcfy.onrender.com//ws/${roomId}`;
+        const wsUrl = `wss://p2p-file-sharing-zcfy.onrender.com/ws/${roomId}`;
         const ws = new WebSocket(wsUrl);
         
         ws.onopen = () => {
