@@ -180,7 +180,7 @@ async function startAnswerer(webso , peerId) {
 // SIGNALING CONNECTION
 // ===========================
 async function connectToSignaling(role) {
-    const wsUrl = `wss://p2p-file-sharing-zcfy.onrender.com//ws/${roomId}`;
+    const wsUrl = `wss://p2p-file-sharing-zcfy.onrender.com/ws/${roomId}`;
     return new Promise((resolve, reject) => {
         let joinResolve = resolve;
         // console.log(`🔌 Connecting to signaling server: ${wsUrl}`);
