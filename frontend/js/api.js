@@ -7,7 +7,7 @@
  */
 
 // ── Config ────────────────────────────────────────────────
-export const BASE_URL = 'https://p2p-file-sharing-production-770f.up.railway.app';
+export const BASE_URL = 'https://p2p-file-sharing-zcfy.onrender.com';
 export const TOKEN_KEY = 'peerdrop_access_token';
 
 // ── Error class ───────────────────────────────────────────
